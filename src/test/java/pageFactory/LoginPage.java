@@ -3,19 +3,17 @@ package pageFactory;
 import java.util.List;
 import java.util.Map;
 
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
+import utilities.CommonMethods;
 import utilities.ConfigReader;
 import utilities.ExcelReader;
 import utilities.LoggerLoad;
 import webdriver.DriverFactory;
 
 public class LoginPage {
-
-	private WebDriver driver = null;
 	
 	@FindBy (id=("id_username")) private WebElement userName;
 	@FindBy (id=("id_password")) private WebElement passWord;
@@ -27,8 +25,7 @@ public class LoginPage {
 	String loginText, logoutText;
 	
 	public LoginPage() {
-		this.driver = DriverFactory.getdriver();
-		PageFactory.initElements(driver, this);
+		PageFactory.initElements(DriverFactory.getdriver(), this);
 		LoggerLoad.info("Initialized Login Page");
 	}
 		
@@ -58,11 +55,13 @@ public class LoginPage {
 	}
 	
 	public String compareLogoutMsg() {
+		CommonMethods.waitForElementTobeClick(alertMsg);
 		logoutText = alertMsg.getText();
 		return logoutText;
 	}
 	
 	public String compareLoginMsg() {
+		CommonMethods.waitForElementTobeClick(alertMsg);
 		loginText = alertMsg.getText();
 		return loginText;	
 	}

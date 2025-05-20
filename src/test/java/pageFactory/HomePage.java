@@ -1,6 +1,5 @@
 package pageFactory;
 
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
@@ -10,14 +9,11 @@ import webdriver.DriverFactory;
 
 public class HomePage {
 	
-	private WebDriver driver = null;
-	
 	@FindBy (xpath=("//*[text()='Get Started']")) WebElement getStarted;
 	@FindBy (xpath=("//*[text()='Sign in']")) WebElement signIn ;
 
 	public HomePage() {
-		this.driver = DriverFactory.getdriver();
-		PageFactory.initElements(driver, this);
+		PageFactory.initElements(DriverFactory.getdriver(), this);
 		LoggerLoad.info("Initialized Home Page");
 	}
 	
