@@ -60,18 +60,18 @@ public class DataStructurePage {
 	public void clickTryHere() {
 		tryHereButton.click();
 	}	
-	public void emptyCode(String emptyCode, String expectedResults) {
+	public void emptyCode(String emptyCode) {
 		enterCode.sendKeys(emptyCode);
 		runBttn.click();			
 	}	
-	public void validCode(String validCode, String expectedResults) {
+	public void validCode(String validCode) {
 		enterCode.sendKeys(validCode);
 		runBttn.click();
 	}	
 	public boolean isOutputSuccess() {
 		return output.isDisplayed();
 	}
-	public void invalidCode(String invalidCode, String expectedResults) {
+	public void invalidCode(String invalidCode) {
 		enterCode.sendKeys(invalidCode);
 		runBttn.click();
 	}

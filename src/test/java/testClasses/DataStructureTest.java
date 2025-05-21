@@ -81,13 +81,13 @@ public class DataStructureTest extends Hooks {
 		LoggerLoad.info("Verifying redirection to tryEditor page, expected title: " + expectedTitle);
 		Assert.assertEquals(driver.getTitle(), expectedTitle, "Not directed to try editor page");
 		
-		pfm.getDataStructurePage().emptyCode(emptyCode, expectedResults);
+		pfm.getDataStructurePage().emptyCode(emptyCode);
 	}
 	
 	
 	public void validCodeTest(String validCode, String expectedResults) {
 		driver.navigate().refresh();
-		pfm.getDataStructurePage().validCode(validCode, expectedResults);
+		pfm.getDataStructurePage().validCode(validCode);
 		if(pfm.getDataStructurePage().isOutputSuccess()) {
 			assertTrue(pfm.getDataStructurePage().isOutputSuccess(), "Success output not shown as expected: " +expectedResults);
 			LoggerLoad.info("Output is successfully displayed");
@@ -101,7 +101,7 @@ public class DataStructureTest extends Hooks {
 
 	public void invalidCodeTest(String invalidCode, String expectedResults) {
 		driver.navigate().refresh();
-		pfm.getDataStructurePage().invalidCode(invalidCode, expectedResults);
+		pfm.getDataStructurePage().invalidCode(invalidCode);
 		String actualMsg = CommonMethods.getAlertText(driver);
 		if(actualMsg==null) {
 			LoggerLoad.error("Expected to receive Alert after invalid python code");

@@ -82,13 +82,13 @@ public class GraphTest extends Hooks{
 		LoggerLoad.info("Verifying redirection to tryEditor page, expected title: " + expectedTitle);
 		Assert.assertEquals(driver.getTitle(), expectedTitle, "Not directed to try editor page");
 		
-		pfm.getGraphPage().emptyCode(emptyCode, expectedResults);
+		pfm.getGraphPage().emptyCode(emptyCode);
 	}
 	
 	
 	public void validCodeTest(String validCode, String expectedResults) {
 		driver.navigate().refresh();
-		pfm.getGraphPage().validCode(validCode, expectedResults);
+		pfm.getGraphPage().validCode(validCode);
 		if(pfm.getGraphPage().isOutputSuccess()) {
 			assertTrue(pfm.getGraphPage().isOutputSuccess(), "Success output not shown as expected: " +expectedResults);
 			LoggerLoad.info("Output is successfully displayed");
@@ -102,7 +102,7 @@ public class GraphTest extends Hooks{
 
 	public void invalidCodeTest(String invalidCode, String expectedResults) {
 		driver.navigate().refresh();
-		pfm.getGraphPage().invalidCode(invalidCode, expectedResults);
+		pfm.getGraphPage().invalidCode(invalidCode);
 		String actualMsg = CommonMethods.getAlertText(driver);
 		if(actualMsg==null) {
 			LoggerLoad.error("Expected to receive Alert after invalid python code");

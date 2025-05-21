@@ -142,12 +142,12 @@ public class ArrayTest extends Hooks {
 		LoggerLoad.info("Verifying redirection to tryEditor page, expected title: " + expectedTitle);
 		Assert.assertEquals(driver.getTitle(), expectedTitle, "Not directed to try editor page");
 
-		pfm.getArrayPage().emptyCode(emptyCode, expectedResults);
+		pfm.getArrayPage().emptyCode(emptyCode);
 	}
 
 	public void validCodeTest(String validCode, String expectedResults) {
 		driver.navigate().refresh();
-		pfm.getArrayPage().validCode(validCode, expectedResults);
+		pfm.getArrayPage().validCode(validCode);
 		if (pfm.getArrayPage().isOutputSuccess()) {
 			assertTrue(pfm.getArrayPage().isOutputSuccess(),
 					"Success output not shown as expected: " + expectedResults);
@@ -161,7 +161,7 @@ public class ArrayTest extends Hooks {
 
 	public void invalidCodeTest(String invalidCode, String expectedResults) {
 		driver.navigate().refresh();
-		pfm.getArrayPage().invalidCode(invalidCode, expectedResults);
+		pfm.getArrayPage().invalidCode(invalidCode);
 		String actualMsg = CommonMethods.getAlertText(driver);
 		if (actualMsg == null) {
 			LoggerLoad.error("Expected to receive Alert after invalid python code");

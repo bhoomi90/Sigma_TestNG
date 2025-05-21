@@ -77,11 +77,11 @@ public class ArrayPage {
 		tryHereButton.click();
 	}	
 	
-	public void emptyCode(String emptyCode, String expectedResults) {
+	public void emptyCode(String emptyCode) {
 		writeTryEditorCode.sendKeys(emptyCode);
 		runBttn.click();			
 	}	
-	public void validCode(String validCode, String expectedResults) {
+	public void validCode(String validCode) {
 		writeTryEditorCode.sendKeys(validCode);
 		runBttn.click();
 	}	
@@ -92,7 +92,7 @@ public class ArrayPage {
 		CommonMethods.waitForElementTobeClick(output);
 		return output.getText();
 	}
-	public void invalidCode(String invalidCode, String expectedResults) {
+	public void invalidCode(String invalidCode) {
 		writeTryEditorCode.sendKeys(invalidCode);
 		runBttn.click();
 	}
