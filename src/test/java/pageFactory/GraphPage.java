@@ -30,7 +30,7 @@ public class GraphPage {
 	
 	public GraphPage() {
 		PageFactory.initElements(DriverFactory.getdriver(), this);
-		LoggerLoad.info("Initialized DataStructure Page");
+		LoggerLoad.info("Initialized Graph Page");
 	}	
 	
 	public void GraphIntro() {
@@ -52,7 +52,7 @@ public class GraphPage {
 		}
 		return itemTexts;
 	}
-	public void clickGraphPageLinks(String item) throws InterruptedException {
+	public void clickGraphPageLinks(String item) {
 		for(WebElement e: graphPageLinks) {
 			if(e.getText().equalsIgnoreCase(item)) {
 				LoggerLoad.info("Clicked on : " +e.getText());
@@ -61,15 +61,6 @@ public class GraphPage {
 			}
 		}
 	}
-	
-//	public void GraphElementPage() {
-//		graphPage.click();
-//		LoggerLoad.info("Directed to Graph page");
-//	}
-//	public void GraphRepresentations() {
-//		graphRep.click();
-//		LoggerLoad.info("Directed to Graph Representation page");
-//	}
 	
 	public void clickTryHere() {
 		tryHereButton.click();

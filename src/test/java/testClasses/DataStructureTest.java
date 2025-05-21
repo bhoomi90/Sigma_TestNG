@@ -55,10 +55,10 @@ public class DataStructureTest extends Hooks {
 			String pythonCode = row.get("code");
 	        String expectedResult = row.get("expectedResults");
 
-	        System.out.println("Validation Type: " + validationType);
-	        System.out.println("Python Code: " + pythonCode);
-	        System.out.println("Expected Result: " + expectedResult);
-	        System.out.println("-----------");
+	        LoggerLoad.info("Validation Type: " + validationType);
+	        LoggerLoad.info("Python Code: " + pythonCode);
+	        LoggerLoad.info("Expected Result: " + expectedResult);
+	        LoggerLoad.info("-----------");
 	        
 	        switch (validationType.trim().toLowerCase()) {
 			case "empty":

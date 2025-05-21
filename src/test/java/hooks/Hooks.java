@@ -6,6 +6,7 @@ import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Optional;
 import org.testng.annotations.Parameters;
+import org.testng.asserts.SoftAssert;
 
 import utilities.ConfigReader;
 import utilities.LoggerLoad;
@@ -16,37 +17,38 @@ public class Hooks {
 
 	protected static WebDriver driver;
 	protected pageFactoryManager pfm = new pageFactoryManager();
-	
+	protected static SoftAssert softAssert = new SoftAssert();
+
 	@Parameters("browser")
 	@BeforeClass
 	public static void setUp(@Optional("chrome") String browser) throws Throwable {
 		LoggerLoad.info("Loading Config file");
 		ConfigReader.loadConfig();
 		LoggerLoad.info("Setup browser executed");
-		LoggerLoad.info("Initializing driver for : "+browser);				
+		LoggerLoad.info("Initializing driver for : " + browser);
 		DriverFactory.init_driver(browser);
 		driver = DriverFactory.getdriver();
 		driver.get(ConfigReader.getPropertyValue("URL"));
-		LoggerLoad.info("Open DSPortal App: " +ConfigReader.getPropertyValue("URL"));
+		LoggerLoad.info("Open DSPortal App: " + ConfigReader.getPropertyValue("URL"));
 	}
-	
-	@BeforeMethod(onlyForGroups = {"login"})
+
+	@BeforeMethod(onlyForGroups = { "login" })
 	public void logintoDsPortal() {
-		LoggerLoad.info("Let's login to DsPortal App");		
-		
+		LoggerLoad.info("Let's login to DsPortal App");
+
 		pfm.getHomePage().clickgetStarted();
 		pfm.getHomePage().clickSignIn();
-		
+
 		pfm.getLoginPage().loginToApp();
 		LoggerLoad.info("Clicked Login button");
 	}
-	
+
 	@AfterClass
-	public static void tearDown() {	
-		if(driver!=null) {
+	public static void tearDown() {
+		if (driver != null) {
 			LoggerLoad.info("teardown browser executed: ");
-			DriverFactory.quitBrowser();	
+			DriverFactory.quitBrowser();
 		}
 	}
-	
+
 }

@@ -16,6 +16,13 @@ public class TestDataProvider {
 	    return reader.getDataAll(sheetName);
 	}
 	
+	@DataProvider(name = "practiceQueCode")
+	public static List<Map<String, String>> getAllpracticeQueCodeData() {
+	    String sheetName = "Array";
+	    ExcelReader reader = new ExcelReader(filePath);
+	    return reader.getDataAll(sheetName);
+	}
+	
 //	@DataProvider(name = "ValidLoginData")
 //	public Object[][] getLoginData() {
 //		String sheetName = "Login";

@@ -13,22 +13,6 @@ public class CommonMethods {
 
 	public static final int DEFAULT_TIMEOUT = 10;
 	
-//	public static String getCurrentTitle() {
-//		WebDriver driver = DriverFactory.getdriver();
-//		return driver.getTitle();
-//	}
-//	public static String getCurrentUrl() {
-//		WebDriver driver = DriverFactory.getdriver();
-//		return driver.getCurrentUrl();
-//	}	
-//	public static void refreshPage() {
-//		WebDriver driver = DriverFactory.getdriver();
-//		driver.navigate().refresh();
-//	}
-//	public static void navigateBack() {
-//		WebDriver driver = DriverFactory.getdriver();
-//		driver.navigate().back();
-//	}
 	public static String getAlertText(WebDriver driver) {
     	try {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(DEFAULT_TIMEOUT));
@@ -41,9 +25,7 @@ public class CommonMethods {
             return null;
         }
 	}
-//	public static String getTextForElement(WebElement locator) {
-//		return locator.getText();
-//	}
+
 	public static void waitForElementTobeClick(WebElement locator) {
 		try {
 			WebDriver driver = DriverFactory.getdriver();
