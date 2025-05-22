@@ -13,7 +13,7 @@ public class DriverFactory {
 
 	private static ThreadLocal<WebDriver> threadlocalDriver = new ThreadLocal<>();
 	
-	
+
 	public static void init_driver(String browserName) {
 		WebDriver driver;
 
@@ -37,9 +37,7 @@ public class DriverFactory {
 		driver.manage().deleteAllCookies();
 		driver.manage().window().maximize();
 		driver.manage().timeouts().pageLoadTimeout(Duration.ofSeconds(10));
-		  
-	}
-	
+
 
 	public static WebDriver getdriver() {
 		return threadlocalDriver.get();
@@ -53,3 +51,4 @@ public class DriverFactory {
     	}
 		 }
       }
+

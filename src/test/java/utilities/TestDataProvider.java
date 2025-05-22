@@ -2,45 +2,51 @@ package utilities;
 
 import java.util.List;
 
+
 import java.util.Map;
 import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 
 import org.testng.annotations.DataProvider;
 import java.io.IOException;
+
+import org.testng.annotations.DataProvider;
+
+
 public class TestDataProvider {
 
 	static String filePath = ConfigReader.getPropertyValue("EXCELPATH");
 
-	
-	public static Object[][] convertListTo2DArray(List<Map<String, String>> list) {
-		Object[][] data = new Object[list.size()][1];
-		for (int i = 0; i < list.size(); i++) {
-			data[i][0] = list.get(i); // Each row gets one Map
-		}
-		return data;
-	}
 
-	@DataProvider(name = "TryeditorProvider")
-	public Object[][] getPythonData() throws InvalidFormatException, IOException {
-		String sheetName = "PythonCode";
-		ExcelReader reader = new ExcelReader(filePath);
+	
+	/*public static Object[][] convertListTo2DArray(List<Map<String, String>> list) {
+	//	Object[][] data = new Object[list.size()][1];
+	//	for (int i = 0; i < list.size(); i++) {
+		//	data[i][0] = list.get(i); // Each row gets one Map
+		//}
+		//return data;
+	//}
+
+	//@DataProvider(name = "TryeditorProvider")
+	//public Object[][] getPythonData() throws InvalidFormatException, IOException {
+		//String sheetName = "PythonCode";
+		//ExcelReader reader = new ExcelReader(filePath);
 		//String filePath = configReader.getProperty("FilePath");
 		//String sheetName = configReader.getProperty("tryeditorSheet");
-		List<Map<String, String>> excelData = reader.getDataAll(sheetName);
-		return convertListTo2DArray(excelData);
-	}
-	@DataProvider(name = "loginData")
-	public static Object[][] getLoginData() throws IOException, InvalidFormatException {
-	    String sheetName = "Login";
-	    ExcelReader reader = new ExcelReader(filePath);
-	    List<Map<String, String>> testData = reader.getDataAll(sheetName);
+		//List<Map<String, String>> excelData = reader.getDataAll(sheetName);
+		//return convertListTo2DArray(excelData);
+	//}
+//	@DataProvider(name = "loginData")
+	//public static Object[][] getLoginData() throws IOException, InvalidFormatException {
+	  //  String sheetName = "Login";
+	  //  ExcelReader reader = new ExcelReader(filePath);
+	   // List<Map<String, String>> testData = reader.getDataAll(sheetName);
 
-	    Object[][] data = new Object[testData.size()][1];
-	    for (int i = 0; i < testData.size(); i++) {
-	        data[i][0] = testData.get(i);
-	    }
-	    return data;
-	}
+	    //Object[][] data = new Object[testData.size()][1];
+	    //for (int i = 0; i < testData.size(); i++) {
+	       // data[i][0] = testData.get(i);
+	   // }
+	   // return data;
+//	}*/
 
 	
 	@DataProvider(name = "pythonCode")
@@ -49,5 +55,120 @@ public class TestDataProvider {
 	    ExcelReader reader = new ExcelReader(filePath);
 	    return reader.getDataAll(sheetName);
 	}
-	   
+	
+	@DataProvider(name = "practiceQueCode")
+	public static List<Map<String, String>> getAllpracticeQueCodeData() {
+	    String sheetName = "Array";
+	    ExcelReader reader = new ExcelReader(filePath);
+	    return reader.getDataAll(sheetName);
+	}
+	
+//	@DataProvider(name = "ValidLoginData")
+//	public Object[][] getLoginData() {
+//		String sheetName = "Login";
+//		String validationType = "ValidCredential";
+//		String usernameTestData = null;
+//		String passwordTestData = null;
+//		List<Map<String, String>> testData;
+//		ExcelReader reader = new ExcelReader(filePath);
+//		testData = reader.getDataAll(sheetName);
+//
+//		for (Map<String, String> row : testData) {
+//			String validationTestData = row.get("validation");
+//
+//			if (validationType.equalsIgnoreCase(validationTestData)) {
+//				usernameTestData = row.get("username");
+//				passwordTestData = row.get("password");
+//				break;
+//			}
+//		}
+//		return new Object[][] { { usernameTestData, passwordTestData } };
+//	}
+//
+//	@DataProvider(name = "EmptyCode")
+//	public Object[][] getEmptyCode() {
+//		String sheetName = "PythonCode";
+//		String validationType = "Empty";
+//		String emptyCode = null;
+//		String expectedResults = null;
+//		List<Map<String, String>> testData;
+//		ExcelReader reader = new ExcelReader(filePath);
+//		testData = reader.getDataAll(sheetName);
+//
+//		for (Map<String, String> row : testData) {
+//			String validationTestData = row.get("codeValidations");
+//
+//			if (validationType.equalsIgnoreCase(validationTestData)) {
+//				emptyCode = row.get("code");
+//				expectedResults = row.get("expectedResults");
+//				break;
+//			}
+//		}
+//		return new Object[][] {{emptyCode, expectedResults}};
+//	}
+//	
+//	@DataProvider(name = "ValidCode")
+//	public Object[][] getValidCode() {
+//		String sheetName = "PythonCode";
+//		String validationType = "Valid";
+//		String validCode = null;
+//		String expectedResults = null;
+//		List<Map<String, String>> testData;
+//		ExcelReader reader = new ExcelReader(filePath);
+//		testData = reader.getDataAll(sheetName);
+//
+//		for (Map<String, String> row : testData) {
+//			String validationTestData = row.get("codeValidations");
+//
+//			if (validationType.equalsIgnoreCase(validationTestData)) {
+//				validCode = row.get("code");
+//				expectedResults = row.get("expectedResults");
+//				break;
+//			}
+//		}
+//		return new Object[][] {{validCode, expectedResults}};
+//	}
+	
+//	@DataProvider(name = "invalidCode")
+//	public Object[][] getInvalidCode() {
+//		String sheetName = "PythonCode";
+//		String validationType = "Invalid";
+//		String invalidCode = null;
+//		String expectedResults = null;
+//		List<Map<String, String>> testData;
+//		ExcelReader reader = new ExcelReader(filePath);
+//		testData = reader.getDataAll(sheetName);
+//
+//		for (Map<String, String> row : testData) {
+//			String validationTestData = row.get("codeValidations");
+//
+//			if (validationType.equalsIgnoreCase(validationTestData)) {
+//				invalidCode = row.get("code");
+//				expectedResults = row.get("expectedResults");
+//				break;
+//			}
+//		}
+//		return new Object[][] {{invalidCode, expectedResults}};
+//	}
+	
+
+	    // Use a list to collect all rows that match validation
+//	    List<Object[]> data = new ArrayList<>();
+//
+//	    for (Map<String, String> row : testData) {
+//	        String validationTestData = row.get("codeValidations");
+//	        String pythonCode = row.get("code");
+//	        String expectedResults = row.get("expectedResults");
+//
+//	        // You can apply a filter if needed, for example:
+//	        // if (validationTestData.equalsIgnoreCase("Invalid")) { ... }
+//
+//	        data.add(new Object[] { validationTestData, pythonCode, expectedResults });
+//	    }
+//
+//	    // Convert List<Object[]> to Object[][]
+//	    return data.toArray(new Object[][] {});
+	
+	
 }
+

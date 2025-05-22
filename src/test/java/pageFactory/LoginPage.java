@@ -6,6 +6,8 @@ import java.util.Map;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+
+import utilities.CommonMethods;
 import utilities.ConfigReader;
 import utilities.ExcelReader;
 import utilities.LoggerLoad;
@@ -23,6 +25,7 @@ public class LoginPage {
 	String loginText, logoutText;
 	
 	public LoginPage() {
+
 	PageFactory.initElements(DriverFactory.getdriver(), this);
 		LoggerLoad.info("Initialized Login Page");
 	}
@@ -40,6 +43,11 @@ public class LoginPage {
 	    }
 
 	
+
+		PageFactory.initElements(DriverFactory.getdriver(), this);
+		LoggerLoad.info("Initialized Login Page");
+	}
+		
 	public void loginToApp() {
 		String sheetName = "Login";
 		String validationType = "ValidCredential";
@@ -66,11 +74,13 @@ public class LoginPage {
 	}
 	
 	public String compareLogoutMsg() {
+		//CommonMethods.waitForElementTobeClick(alertMsg);
 		logoutText = alertMsg.getText();
 		return logoutText;
 	}
 	
 	public String compareLoginMsg() {
+		//CommonMethods.waitForElementTobeClick(alertMsg);
 		loginText = alertMsg.getText();
 		return loginText;	
 	}
@@ -78,4 +88,7 @@ public class LoginPage {
 	public void clickSignOut() {
 		signOut.click();
 	}
+
 }
+
+
