@@ -13,7 +13,7 @@ public class DriverFactory {
 
 	private static ThreadLocal<WebDriver> threadlocalDriver = new ThreadLocal<>();
 	
-	// Start browser based on the input
+
 	public static void init_driver(String browserName) {
 		WebDriver driver;
 
@@ -37,18 +37,18 @@ public class DriverFactory {
 		driver.manage().deleteAllCookies();
 		driver.manage().window().maximize();
 		driver.manage().timeouts().pageLoadTimeout(Duration.ofSeconds(10));
-	}
+
 
 	public static WebDriver getdriver() {
 		return threadlocalDriver.get();
 	}
 	
-	// Quit browser
-	public static void quitBrowser() {
-		if (threadlocalDriver.get() != null) {
-			LoggerLoad.info("Closing local driver");
-			threadlocalDriver.get().quit();
-			threadlocalDriver.remove();
-		}
-	}
-}
+    public static void quitBrowser() {
+    	if (threadlocalDriver.get() !=null) {
+    	LoggerLoad.info("Closing local driver");
+    	threadlocalDriver.get().quit();
+    	threadlocalDriver.remove();
+    	}
+		 }
+      }
+

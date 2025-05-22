@@ -25,6 +25,25 @@ public class LoginPage {
 	String loginText, logoutText;
 	
 	public LoginPage() {
+
+	PageFactory.initElements(DriverFactory.getdriver(), this);
+		LoggerLoad.info("Initialized Login Page");
+	}
+	
+	public void loginClick() {
+			login.click();
+		}
+	
+	 public void setUsername(String username) {
+	        userName.sendKeys(username);
+	    }
+
+	    public void setPassword(String password) {
+	        passWord.sendKeys(password);
+	    }
+
+	
+
 		PageFactory.initElements(DriverFactory.getdriver(), this);
 		LoggerLoad.info("Initialized Login Page");
 	}
@@ -55,13 +74,13 @@ public class LoginPage {
 	}
 	
 	public String compareLogoutMsg() {
-		CommonMethods.waitForElementTobeClick(alertMsg);
+		//CommonMethods.waitForElementTobeClick(alertMsg);
 		logoutText = alertMsg.getText();
 		return logoutText;
 	}
 	
 	public String compareLoginMsg() {
-		CommonMethods.waitForElementTobeClick(alertMsg);
+		//CommonMethods.waitForElementTobeClick(alertMsg);
 		loginText = alertMsg.getText();
 		return loginText;	
 	}
@@ -69,4 +88,7 @@ public class LoginPage {
 	public void clickSignOut() {
 		signOut.click();
 	}
+
 }
+
+

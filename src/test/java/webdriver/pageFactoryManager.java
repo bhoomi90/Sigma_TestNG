@@ -25,6 +25,7 @@ public class pageFactoryManager {
 	TreePage treePage;
 	
 	
+
 	public ArrayPage getArrayPage() {
 		if (arrayPage != null)
 			return arrayPage;
@@ -114,6 +115,6 @@ public class pageFactoryManager {
 			return treePage;
 		}
 	}
-}
 
+}
 
