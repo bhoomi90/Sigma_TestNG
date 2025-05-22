@@ -8,11 +8,6 @@ import org.testng.annotations.Optional;
 import org.testng.annotations.Parameters;
 import org.testng.asserts.SoftAssert;
 
-
-import pageFactory.HomePage;
-import pageFactory.LoginPage;
-
-
 import utilities.ConfigReader;
 import utilities.LoggerLoad;
 import webdriver.DriverFactory;
@@ -30,33 +25,6 @@ public class Hooks {
 		LoggerLoad.info("Loading Config file");
 		ConfigReader.loadConfig();
 		LoggerLoad.info("Setup browser executed");
-
-		LoggerLoad.info("Initializing driver for : "+browser);				
-		DriverFactory.init_driver(browser);
-		driver = DriverFactory.getdriver();
-		driver.get(ConfigReader.getPropertyValue("URL"));
-		LoggerLoad.info("Open DSPortal App: " +ConfigReader.getPropertyValue("URL"));
-	}
-	
-	@BeforeMethod(onlyForGroups = {"login"})
-	public void logintoDsPortal() {
-		LoggerLoad.info("Let's login to DsPortal App");
-			pfm.getHomePage().getStartedBtnClick();
-			pfm.getHomePage().signInLinkClick();
-			pfm.getLoginPage().loginToApp();
-		LoggerLoad.info("Clicked Login button");
-	}
-	
-	@AfterClass
-	public static void tearDown() {	
-		if(driver!=null) {
-			LoggerLoad.info("teardown browser executed: " + ConfigReader.getBrowserType());
-			DriverFactory.quitBrowser();	
-		}
-	}
-	
-}
-
 		LoggerLoad.info("Initializing driver for : " + browser);
 		DriverFactory.init_driver(browser);
 		driver = DriverFactory.getdriver();
