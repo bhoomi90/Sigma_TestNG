@@ -2,12 +2,6 @@ package pageFactory;
 
 
 import org.openqa.selenium.WebDriver;
-
-public class ArrayPage {
-
-	
-
-
 import java.util.ArrayList;
 import java.util.List;
 
