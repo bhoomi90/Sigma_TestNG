@@ -6,6 +6,7 @@ import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Optional;
 import org.testng.annotations.Parameters;
+import org.testng.asserts.SoftAssert;
 
 import pageFactory.HomePage;
 import pageFactory.LoginPage;
@@ -18,6 +19,7 @@ public class Hooks {
 
 	protected static WebDriver driver;
 	protected pageFactoryManager pfm = new pageFactoryManager();
+	protected static SoftAssert softAssert = new SoftAssert();
 
 	@Parameters("browser")
 	@BeforeClass
@@ -35,13 +37,8 @@ public class Hooks {
 	@BeforeMethod(onlyForGroups = {"login"})
 	public void logintoDsPortal() {
 		LoggerLoad.info("Let's login to DsPortal App");
-		//HomePage homePage = 
 			pfm.getHomePage().getStartedBtnClick();
-		//homePage.getStartedBtnClick();
-		//homePage.signInLinkClick();
 			pfm.getHomePage().signInLinkClick();
-		//LoginPage loginPage = pfm.getLoginPage();
-		//loginPage.loginToApp();
 			pfm.getLoginPage().loginToApp();
 		LoggerLoad.info("Clicked Login button");
 	}

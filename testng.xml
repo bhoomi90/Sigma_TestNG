@@ -1,10 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
-<suite name="CrossBrowserSuite" parallel="tests" thread-count="2">
+<suite name="CrossBrowserSuite">
+  <listeners>
+        <listener class-name="extentReports.ExtentReportListeners"/>
+        <listener class-name="com.aventstack.chaintest.plugins.ChainTestListener"/>
+     </listeners>
     <test name="ChromeTest">
         <parameter name="browser" value="chrome"/>
         <classes>
-            <class name="testClasses.GraphTest"></class>
+            <class name="testClasses.TreeTest"></class>
             <class name="testClasses.StackTest"></class>
             <class name="testClasses.QueueTest"></class>
         </classes>
@@ -13,7 +17,7 @@
    <test name="EdgeTest">
         <parameter name="browser" value="edge"/>
         <classes>
-            <class name="testClasses.GraphTest"></class>
+            <class name="testClasses.TreeTest"></class>
             <class name="testClasses.StackTest"></class>
             <class name="testClasses.QueueTest"></class>
         </classes>

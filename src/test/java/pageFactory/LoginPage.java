@@ -16,8 +16,6 @@ public class LoginPage {
 	@FindBy (id=("id_username")) private WebElement userName;
 	@FindBy (id=("id_password")) private WebElement passWord;
 	@FindBy (xpath=("//*[@type='submit']")) private WebElement login;
-	//@FindBy(xpath = "//input[@value='Login']") 
-	//private WebElement loginBtnClick;
 	@FindBy (xpath=("//a[text()='Sign out']")) private WebElement signOut;
 	@FindBy (xpath=("//*[@role='alert']")) private WebElement alertMsg;
 	
@@ -33,12 +31,6 @@ public class LoginPage {
 			login.click();
 		}
 	
-	/*public void loginWithCredentials(String username, String password) {
-	    LoggerLoad.info("Trying to login with username: " + username);
-	    userName.sendKeys(username);
-	    passWord.sendKeys(password);
-	    login.click();
-	}*/
 	 public void setUsername(String username) {
 	        userName.sendKeys(username);
 	    }
@@ -74,13 +66,11 @@ public class LoginPage {
 	}
 	
 	public String compareLogoutMsg() {
-		//logoutText = CommonMethods.getTextForElement(alertMsg);
 		logoutText = alertMsg.getText();
 		return logoutText;
 	}
 	
 	public String compareLoginMsg() {
-		//loginText = CommonMethods.getTextForElement(alertMsg);
 		loginText = alertMsg.getText();
 		return loginText;	
 	}

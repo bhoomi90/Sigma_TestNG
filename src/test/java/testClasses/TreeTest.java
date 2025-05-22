@@ -15,15 +15,17 @@ import utilities.TestDataProvider;
 
 public class TreeTest extends Hooks{
 	    
-		@Test(groups = {"login"},priority = 1)
-		public void verifySuccessfulLogin() {
-		   LoggerLoad.info("I am inside verifySuccessfulLogin method");
-		   String expectedTitle = "NumpyNinja";  
-		      String actualTitle = driver.getTitle();
-		   Assert.assertEquals(actualTitle, expectedTitle, "Login failed or incorrect landing page.");
-
-		   LoggerLoad.info("Login verified successfully. Landed on: " + actualTitle);
-		}
+	@Test (groups = {"login"}, priority = 1)     
+	public void verifySuccessfulLogin() {
+		Assert.assertEquals(pfm.getLoginPage().compareLoginMsg(), "You are logged in");
+		LoggerLoad.info("User is logged in");
+	    
+		String expectedTitle = "NumpyNinja";
+		LoggerLoad.info("Verifying redirection to Home page, expected title: " + expectedTitle);
+		Assert.assertEquals(driver.getTitle(), expectedTitle, "Not directed to Home page");
+		
+	    LoggerLoad.info("Login verified successfully. Landed on: " + driver.getTitle());
+	}
 		
 		@Test(priority = 2)
 		public void navigateTreePage() {
@@ -43,6 +45,7 @@ public class TreeTest extends Hooks{
 				validateTryEditorWindow();
 				practiceQuePage();
 			}
+			softAssert.assertAll();
 			}
 
 
@@ -81,13 +84,13 @@ public class TreeTest extends Hooks{
 			LoggerLoad.info("Verifying redirection to tryEditor page, expected title: " + expectedTitle);
 			Assert.assertEquals(driver.getTitle(), expectedTitle, "Not directed to try editor page");
 			
-			pfm.getTreePage().emptyCode(emptyCode, expectedResults);
+			pfm.getTreePage().emptyCode(emptyCode);
 		}
 		
 		
 		public void validCodeTest(String validCode, String expectedResults) {
 			driver.navigate().refresh();
-			pfm.getTreePage().validCode(validCode, expectedResults);
+			pfm.getTreePage().validCode(validCode);
 			if(pfm.getTreePage().isOutputSuccess()) {
 				assertTrue(pfm.getTreePage().isOutputSuccess(), "Success output not shown as expected: " +expectedResults);
 				LoggerLoad.info("Output is successfully displayed");
@@ -101,7 +104,7 @@ public class TreeTest extends Hooks{
 
 		public void invalidCodeTest(String invalidCode, String expectedResults) {
 			driver.navigate().refresh();
-			pfm.getTreePage().invalidCode(invalidCode, expectedResults);
+			pfm.getTreePage().invalidCode(invalidCode);
 			String actualMsg = CommonMethods.getAlertText(driver);
 			if(actualMsg==null) {
 				LoggerLoad.error("Expected to receive Alert after invalid python code");
@@ -119,7 +122,7 @@ public class TreeTest extends Hooks{
 			LoggerLoad.info("Verifying redirection to Practice Questions page, expected title: " + expectedTitle);
 			Assert.assertEquals(driver.getTitle(), "Practice Questions", "Not directed to practice questions page");
 			
-			Assert.assertFalse(pfm.getTreePage().checkPracticeQueContent(), "Found the page blank. Expected to have List of Practice Questions");		
+			softAssert.assertTrue(pfm.getTreePage().checkPracticeQueContent(), "Found the page blank. Expected to have List of Practice Questions");		
 			if(pfm.getTreePage().checkPracticeQueContent()) 
 				LoggerLoad.info("List of Practice Questions are available");
 			else
@@ -135,7 +138,6 @@ public class TreeTest extends Hooks{
 		public void signOutPage() {
 			driver.navigate().back();
 			pfm.getLoginPage().clickSignOut();
-			
 			Assert.assertEquals(pfm.getLoginPage().compareLogoutMsg(), "Logged out successfully");
 			LoggerLoad.info("User is logged out");
 		}

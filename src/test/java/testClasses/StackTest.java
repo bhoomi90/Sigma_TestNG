@@ -16,14 +16,16 @@ import utilities.TestDataProvider;
 
 public class StackTest extends Hooks{
 	    
-	@Test(groups = {"login"},priority = 1)
+	@Test (groups = {"login"}, priority = 1)     
 	public void verifySuccessfulLogin() {
-	   LoggerLoad.info("I am inside verifySuccessfulLogin method");
-	   String expectedTitle = "NumpyNinja";  
-	      String actualTitle = driver.getTitle();
-	   Assert.assertEquals(actualTitle, expectedTitle, "Login failed or incorrect landing page.");
-
-	   LoggerLoad.info("Login verified successfully. Landed on: " + actualTitle);
+		Assert.assertEquals(pfm.getLoginPage().compareLoginMsg(), "You are logged in");
+		LoggerLoad.info("User is logged in");
+	    
+		String expectedTitle = "NumpyNinja";
+		LoggerLoad.info("Verifying redirection to Home page, expected title: " + expectedTitle);
+		Assert.assertEquals(driver.getTitle(), expectedTitle, "Not directed to Home page");
+		
+	    LoggerLoad.info("Login verified successfully. Landed on: " + driver.getTitle());
 	}
 	
 	@Test(priority = 2)
@@ -44,6 +46,7 @@ public class StackTest extends Hooks{
 			validateTryEditorWindow();
 			practiceQuePage();
 		}
+		softAssert.assertAll();
 		}
 
 
@@ -82,13 +85,13 @@ public class StackTest extends Hooks{
 		LoggerLoad.info("Verifying redirection to tryEditor page, expected title: " + expectedTitle);
 		Assert.assertEquals(driver.getTitle(), expectedTitle, "Not directed to try editor page");
 		
-		pfm.getStackPage().emptyCode(emptyCode, expectedResults);
+		pfm.getStackPage().emptyCode(emptyCode);
 	}
 	
 	
 	public void validCodeTest(String validCode, String expectedResults) {
 		driver.navigate().refresh();
-		pfm.getStackPage().validCode(validCode, expectedResults);
+		pfm.getStackPage().validCode(validCode);
 		if(pfm.getStackPage().isOutputSuccess()) {
 			assertTrue(pfm.getStackPage().isOutputSuccess(), "Success output not shown as expected: " +expectedResults);
 			LoggerLoad.info("Output is successfully displayed");
@@ -102,7 +105,7 @@ public class StackTest extends Hooks{
 
 	public void invalidCodeTest(String invalidCode, String expectedResults) {
 		driver.navigate().refresh();
-		pfm.getStackPage().invalidCode(invalidCode, expectedResults);
+		pfm.getStackPage().invalidCode(invalidCode);
 		String actualMsg = CommonMethods.getAlertText(driver);
 		if(actualMsg==null) {
 			LoggerLoad.error("Expected to receive Alert after invalid python code");
@@ -120,7 +123,7 @@ public class StackTest extends Hooks{
 		LoggerLoad.info("Verifying redirection to Practice Questions page, expected title: " + expectedTitle);
 		Assert.assertEquals(driver.getTitle(), "Practice Questions", "Not directed to practice questions page");
 		
-		Assert.assertFalse(pfm.getStackPage().checkPracticeQueContent(), "Found the page blank. Expected to have List of Practice Questions");		
+		softAssert.assertTrue(pfm.getStackPage().checkPracticeQueContent(), "Found the page blank. Expected to have List of Practice Questions");		
 		if(pfm.getStackPage().checkPracticeQueContent()) 
 			LoggerLoad.info("List of Practice Questions are available");
 		else
@@ -136,7 +139,6 @@ public class StackTest extends Hooks{
 	public void signOutPage() {
 		driver.navigate().back();
 		pfm.getLoginPage().clickSignOut();
-		
 		Assert.assertEquals(pfm.getLoginPage().compareLogoutMsg(), "Logged out successfully");
 		LoggerLoad.info("User is logged out");
 	}
