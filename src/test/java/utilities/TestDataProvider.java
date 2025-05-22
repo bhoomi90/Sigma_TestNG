@@ -1,13 +1,7 @@
 package utilities;
 
 import java.util.List;
-
-
 import java.util.Map;
-import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
-
-import org.testng.annotations.DataProvider;
-import java.io.IOException;
 
 import org.testng.annotations.DataProvider;
 
@@ -16,9 +10,21 @@ public class TestDataProvider {
 
 	static String filePath = ConfigReader.getPropertyValue("EXCELPATH");
 
-
+	@DataProvider(name = "pythonCode")
+	public static List<Map<String, String>> getAllCodeData() {
+	    String sheetName = "PythonCode";
+	    ExcelReader reader = new ExcelReader(filePath);
+	    return reader.getDataAll(sheetName);
+	}
 	
-	/*public static Object[][] convertListTo2DArray(List<Map<String, String>> list) {
+	@DataProvider(name = "practiceQueCode")
+	public static List<Map<String, String>> getAllpracticeQueCodeData() {
+	    String sheetName = "Array";
+	    ExcelReader reader = new ExcelReader(filePath);
+	    return reader.getDataAll(sheetName);
+	}
+	
+	//public static Object[][] convertListTo2DArray(List<Map<String, String>> list) {
 	//	Object[][] data = new Object[list.size()][1];
 	//	for (int i = 0; i < list.size(); i++) {
 		//	data[i][0] = list.get(i); // Each row gets one Map
@@ -46,22 +52,10 @@ public class TestDataProvider {
 	       // data[i][0] = testData.get(i);
 	   // }
 	   // return data;
-//	}*/
+//	}
 
 	
-	@DataProvider(name = "pythonCode")
-	public static List<Map<String, String>> getAllCodeData() {
-	    String sheetName = "PythonCode";
-	    ExcelReader reader = new ExcelReader(filePath);
-	    return reader.getDataAll(sheetName);
-	}
-	
-	@DataProvider(name = "practiceQueCode")
-	public static List<Map<String, String>> getAllpracticeQueCodeData() {
-	    String sheetName = "Array";
-	    ExcelReader reader = new ExcelReader(filePath);
-	    return reader.getDataAll(sheetName);
-	}
+
 	
 //	@DataProvider(name = "ValidLoginData")
 //	public Object[][] getLoginData() {

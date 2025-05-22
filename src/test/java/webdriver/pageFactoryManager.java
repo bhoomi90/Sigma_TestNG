@@ -13,7 +13,7 @@ import pageFactory.TreePage;
 
 public class pageFactoryManager {
 
-	ArrayPage arrayPage ;
+	ArrayPage arrayPage;
 	DataStructurePage dsPage;
 	GraphPage graphPage;
 	HomePage homePage;
@@ -23,8 +23,6 @@ public class pageFactoryManager {
 	RegisterPage registerPage;
 	StackPage stackPage;
 	TreePage treePage;
-	
-	
 
 	public ArrayPage getArrayPage() {
 		if (arrayPage != null)
@@ -34,16 +32,16 @@ public class pageFactoryManager {
 			return arrayPage;
 		}
 	}
-	
+
 	public DataStructurePage getDataStructurePage() {
-		if(dsPage!=null)
+		if (dsPage != null)
 			return dsPage;
 		else {
 			dsPage = new DataStructurePage();
 			return dsPage;
 		}
 	}
-	
+
 	public GraphPage getGraphPage() {
 		if (graphPage != null)
 			return graphPage;
@@ -52,7 +50,7 @@ public class pageFactoryManager {
 			return graphPage;
 		}
 	}
-	
+
 	public HomePage getHomePage() {
 		if (homePage != null)
 			return homePage;
@@ -61,7 +59,7 @@ public class pageFactoryManager {
 			return homePage;
 		}
 	}
-	
+
 	public LinkedListPage getLinkedListPage() {
 		if (linkedlistPage != null)
 			return linkedlistPage;
@@ -70,7 +68,7 @@ public class pageFactoryManager {
 			return linkedlistPage;
 		}
 	}
-	
+
 	public LoginPage getLoginPage() {
 		if (loginPage != null)
 			return loginPage;
@@ -79,7 +77,7 @@ public class pageFactoryManager {
 			return loginPage;
 		}
 	}
-	
+
 	public QueuePage getQueuePage() {
 		if (queuePage != null)
 			return queuePage;
@@ -88,7 +86,7 @@ public class pageFactoryManager {
 			return queuePage;
 		}
 	}
-	
+
 	public RegisterPage getRegisterPage() {
 		if (registerPage != null)
 			return registerPage;
@@ -97,7 +95,7 @@ public class pageFactoryManager {
 			return registerPage;
 		}
 	}
-	
+
 	public StackPage getStackPage() {
 		if (stackPage != null)
 			return stackPage;
@@ -106,7 +104,7 @@ public class pageFactoryManager {
 			return stackPage;
 		}
 	}
-	
+
 	public TreePage getTreePage() {
 		if (treePage != null)
 			return treePage;
@@ -117,4 +115,3 @@ public class pageFactoryManager {
 	}
 
 }
-
