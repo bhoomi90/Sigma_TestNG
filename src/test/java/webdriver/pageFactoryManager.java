@@ -13,16 +13,16 @@ import pageFactory.TreePage;
 
 public class pageFactoryManager {
 
-	protected ArrayPage arrayPage ;
-	protected DataStructurePage dsPage;
-	protected GraphPage graphPage;
-	protected HomePage homePage;
-	protected LinkedListPage linkedlistPage;
-	protected LoginPage loginPage;
-	protected QueuePage queuePage;
-	protected RegisterPage registerPage;
-	protected StackPage stackPage;
-	protected TreePage treePage;
+	ArrayPage arrayPage ;
+	DataStructurePage dsPage;
+	GraphPage graphPage;
+	HomePage homePage;
+	LinkedListPage linkedlistPage;
+	LoginPage loginPage;
+	QueuePage queuePage;
+	RegisterPage registerPage;
+	StackPage stackPage;
+	TreePage treePage;
 	
 	
 

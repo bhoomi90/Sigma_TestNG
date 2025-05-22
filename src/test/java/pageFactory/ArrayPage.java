@@ -71,8 +71,12 @@ public class ArrayPage {
 	}	
 	
 	public void emptyCode(String emptyCode) {
-		writeTryEditorCode.sendKeys(emptyCode);
-		runBttn.click();			
+		if(emptyCode==null)
+			runBttn.click();
+		else {
+			writeTryEditorCode.sendKeys(emptyCode);
+			runBttn.click();	
+		}
 	}	
 	public void validCode(String validCode) {
 		writeTryEditorCode.sendKeys(validCode);
