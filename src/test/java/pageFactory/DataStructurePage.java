@@ -1,11 +1,4 @@
 package pageFactory;
-
-
-
-public class DataStructurePage {
-
-}
-
 import java.util.ArrayList;
 import java.util.List;
 
