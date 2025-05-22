@@ -46,6 +46,7 @@ public class LinkedListTest extends Hooks{
 			validateTryEditorWindow();
 			practiceQuePage();
 		}
+		softAssert.assertAll();
 	}
 
 	public void validateTryEditorWindow() {
@@ -121,7 +122,7 @@ public class LinkedListTest extends Hooks{
 		LoggerLoad.info("Verifying redirection to Practice Questions page, expected title: " + expectedTitle);
 		Assert.assertEquals(driver.getTitle(), "Practice Questions", "Not directed to practice questions page");
 		
-		Assert.assertFalse(pfm.getLinkedListPage().checkPracticeQueContent(), "Found the page blank. Expected to have List of Practice Questions");		
+		softAssert.assertTrue(pfm.getLinkedListPage().checkPracticeQueContent(), "Found the page blank. Expected to have List of Practice Questions");		
 		if(pfm.getLinkedListPage().checkPracticeQueContent()) 
 			LoggerLoad.info("List of Practice Questions are available");
 		else

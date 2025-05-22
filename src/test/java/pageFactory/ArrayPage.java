@@ -18,11 +18,6 @@ public class ArrayPage {
 	@FindBy(xpath = ("//*[@data-toggle='dropdown']")) private WebElement dropdown;
 	@FindBy(xpath = ("//a[text()='Arrays']")) private WebElement dropdownArray;
 
-	@FindBy(xpath = ("//a[text()='Arrays in Python']")) private WebElement arraysInPython;
-	@FindBy(xpath = ("//a[text()='Arrays Using List']")) private WebElement arraysUsingList;
-	@FindBy(xpath = ("//a[text()='Basic Operations in Lists']")) private WebElement basicOperationsInLists;
-	@FindBy(xpath = ("//a[text()='Applications of Array']")) private WebElement applicationsOfArray;
-	
 	@FindBy(css = ".CodeMirror.cm-s-default")  private WebElement writePractQueCode;
 	@FindBy(id="output")  private WebElement output;
 	@FindBy(xpath = ("//*[@type='submit']")) private WebElement submitButton;
@@ -34,10 +29,6 @@ public class ArrayPage {
 	@FindBy(xpath = ("//a[text()='Practice Questions']")) private WebElement PracticeQuesOfArray;
 	@FindBy (className = ("list-group"))  private WebElement pageContent;
 	
-	@FindBy(xpath = ("//a[text()='Search the array']")) private WebElement searchTheArray;
-	@FindBy(xpath = ("//a[text()='Max Consecutive Ones']")) private WebElement maxConsecutiveOnes;
-	@FindBy(xpath = ("//a[text()='Find Numbers with Even Number of Digits']")) private WebElement findNumbersWithEvenNumberOfDigits;
-	@FindBy(xpath = ("//a[text()='Squares of  a Sorted Array']")) private WebElement squaresOfASortedArray;
 	@FindBy(className = ("list-group-item")) private List<WebElement> arrayPageLinks;
 	
 	public ArrayPage() {
