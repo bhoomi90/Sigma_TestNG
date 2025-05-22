@@ -1,11 +1,6 @@
 package pageFactory;
 
 
-
-public class GraphPage {
-
-	}
-
 import java.util.ArrayList;
 import java.util.List;
 
