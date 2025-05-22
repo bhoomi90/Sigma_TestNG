@@ -21,6 +21,12 @@ public class CommonMethods {
         driver.switchTo().alert().accept();
         return alertMsg;
     	} catch (Exception e) {
+
+            System.out.println("No alert found within timeout: "+ DEFAULT_TIMEOUT  + " seconds");
+            return null;
+        }
+	}
+
             LoggerLoad.info("No alert found within timeout: "+ DEFAULT_TIMEOUT  + " seconds");
             return null;
         }
@@ -36,3 +42,4 @@ public class CommonMethods {
 		}
 	}
 }
+
