@@ -13,7 +13,7 @@ import webdriver.DriverFactory;
 public class DataStructurePage {
 
 	@FindBy(xpath = ("//h5[text()='Data Structures-Introduction']/../a[text()='Get Started']")) private WebElement DataStrucIntro;
-	//@FindBy(xpath = ("//a[text()='Time Complexity']")) private WebElement timecomplex;
+
 	@FindBy(className = "list-group-item") public List<WebElement> dataStructPageLinks;
 	
 	@FindBy (xpath = ("//a[text()='Try here>>>']")) private WebElement tryHereButton;
@@ -35,9 +35,6 @@ public class DataStructurePage {
 		DataStrucIntro.click();
 	
 	}
-//	public void TimecomplexInDataStruc_page() {
-//		timecomplex.click();
-//	}
 	
 	public List<String> retriveDataStructPageItems() {
 		List<String> itemTexts = new ArrayList<String>();
