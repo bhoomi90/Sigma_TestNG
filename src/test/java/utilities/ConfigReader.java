@@ -7,7 +7,6 @@ public class ConfigReader {
 
 	public static Properties properties;
 	public static final String propertyFilePath = "./src/test/resources/config.properties";
-	private static ThreadLocal<String> browserType = new ThreadLocal<String>();
 	
 	public static void loadConfig() throws Throwable {
 		FileInputStream fis = new FileInputStream(propertyFilePath);
@@ -24,11 +23,4 @@ public class ConfigReader {
 			throw new RuntimeException("Key "+key+" not specified in config.properties file");
 	}
 	
-	public static void setBrowserType(String browser) {
-		browserType.set(browser);
-	}
-
-	public static String getBrowserType() {
-			return browserType.get();
-	}
 }
