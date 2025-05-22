@@ -7,47 +7,44 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-import utilities.CommonMethods;
 import utilities.ConfigReader;
 import utilities.ExcelReader;
 import utilities.LoggerLoad;
 import webdriver.DriverFactory;
 
 public class LoginPage {
-	
-	@FindBy (id=("id_username")) private WebElement userName;
-	@FindBy (id=("id_password")) private WebElement passWord;
-	@FindBy (xpath=("//*[@type='submit']")) private WebElement login;
-	@FindBy (xpath=("//a[text()='Sign out']")) private WebElement signOut;
-	@FindBy (xpath=("//*[@role='alert']")) private WebElement alertMsg;
-	
+
+	@FindBy(id = ("id_username"))
+	private WebElement userName;
+	@FindBy(id = ("id_password"))
+	private WebElement passWord;
+	@FindBy(xpath = ("//*[@type='submit']"))
+	private WebElement login;
+	@FindBy(xpath = ("//a[text()='Sign out']"))
+	private WebElement signOut;
+	@FindBy(xpath = ("//*[@role='alert']"))
+	private WebElement alertMsg;
+
 	String filePath = ConfigReader.getPropertyValue("EXCELPATH");
 	String loginText, logoutText;
-	
+
 	public LoginPage() {
-
-	PageFactory.initElements(DriverFactory.getdriver(), this);
-		LoggerLoad.info("Initialized Login Page");
-	}
-	
-	public void loginClick() {
-			login.click();
-		}
-	
-	 public void setUsername(String username) {
-	        userName.sendKeys(username);
-	    }
-
-	    public void setPassword(String password) {
-	        passWord.sendKeys(password);
-	    }
-
-	
-
 		PageFactory.initElements(DriverFactory.getdriver(), this);
 		LoggerLoad.info("Initialized Login Page");
 	}
-		
+
+	public void loginClick() {
+		login.click();
+	}
+
+	public void setUsername(String username) {
+		userName.sendKeys(username);
+	}
+
+	public void setPassword(String password) {
+		passWord.sendKeys(password);
+	}
+
 	public void loginToApp() {
 		String sheetName = "Login";
 		String validationType = "ValidCredential";
@@ -66,29 +63,25 @@ public class LoginPage {
 				break;
 			}
 		}
-		
+
 		LoggerLoad.info("Let's login to DsPortal App with valid credentials");
 		userName.sendKeys(validusername);
 		passWord.sendKeys(validpassword);
 		login.click();
 	}
-	
+
 	public String compareLogoutMsg() {
-		//CommonMethods.waitForElementTobeClick(alertMsg);
 		logoutText = alertMsg.getText();
 		return logoutText;
 	}
-	
+
 	public String compareLoginMsg() {
-		//CommonMethods.waitForElementTobeClick(alertMsg);
 		loginText = alertMsg.getText();
-		return loginText;	
+		return loginText;
 	}
-	
+
 	public void clickSignOut() {
 		signOut.click();
 	}
 
 }
-
-

@@ -64,7 +64,7 @@ public class ArrayTest extends Hooks {
 			pfm.getArrayPage().clickArrayPageLinks(queItem);
 			validatePracticeQuePage(queItem);
 		}
-		softAssert.assertAll(); 
+		softAssert.assertAll();
 	}
 
 	public void validatePracticeQuePage(String queType) throws InterruptedException {
@@ -245,15 +245,12 @@ public class ArrayTest extends Hooks {
 
 	@Test(priority = 5)
 	public void signOutPage() {
-		
 
-		
 		driver.navigate().back();
 		pfm.getLoginPage().clickSignOut();
 
 		Assert.assertEquals(pfm.getLoginPage().compareLogoutMsg(), "Logged out successfully");
 		LoggerLoad.info("User is logged out");
-		
 
 	}
 }

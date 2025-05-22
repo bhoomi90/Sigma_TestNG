@@ -9,19 +9,22 @@ import utilities.LoggerLoad;
 import webdriver.DriverFactory;
 
 public class HomePage {
-	
-	@FindBy (xpath=("//*[text()='Get Started']")) WebElement getStarted;
-	@FindBy (xpath=("//*[text()='Sign in']")) WebElement signIn ;
+
+	@FindBy(xpath = ("//*[text()='Get Started']"))
+	WebElement getStarted;
+	@FindBy(xpath = ("//*[text()='Sign in']"))
+	WebElement signIn;
 
 	public HomePage() {
 		PageFactory.initElements(DriverFactory.getdriver(), this);
 		LoggerLoad.info("Initialized Home Page");
 	}
-	
+
 	public void clickgetStarted() {
 		LoggerLoad.info("Clicking get started button in Home page");
 		getStarted.click();
 	}
+
 	public void clickSignIn() {
 		LoggerLoad.info("Clicking signIn button in Home page");
 		signIn.click();
