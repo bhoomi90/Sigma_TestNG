@@ -17,8 +17,6 @@ public class GraphPage {
 	@FindBy(xpath = ("//h5[text()='Graph']/../a[text()='Get Started']")) private WebElement graphIntro;
 
 	@FindBy(className = "list-group-item") public List<WebElement> graphPageLinks;
-//	@FindBy(xpath = "//a[@class='list-group-item'][text()='Graph']") private WebElement graphPage;
-//	@FindBy(xpath = "//a[text()='Graph Representations']") private WebElement graphRep;
 
 	@FindBy(xpath = "//a[text()='Try here>>>']") private WebElement tryHereButton;
 	@FindBy (xpath=("//*[text()='Run']")) private WebElement runBttn;
