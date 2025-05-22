@@ -77,8 +77,12 @@ public class LinkedListPage {
 	}
 	
 	public void emptyCode(String emptyCode) {
-		enterCode.sendKeys(emptyCode);
-		runBttn.click();			
+		if(emptyCode==null)
+			runBttn.click();
+		else {
+			enterCode.sendKeys(emptyCode);
+			runBttn.click();	
+		}			
 	}	
 	public void validCode(String validCode) {
 		enterCode.sendKeys(validCode);
