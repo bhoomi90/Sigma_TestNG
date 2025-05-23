@@ -37,7 +37,7 @@ public class DriverFactory {
 		driver.manage().deleteAllCookies();
 		driver.manage().window().maximize();
 		driver.manage().timeouts().pageLoadTimeout(Duration.ofSeconds(10));
-
+	}
 
 	public static WebDriver getdriver() {
 		return threadlocalDriver.get();
