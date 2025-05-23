@@ -51,7 +51,7 @@ public class ArrayTest extends Hooks {
 	@Test(priority = 4)
 	public void validateArrayPractQuePage() throws InterruptedException {
 		List<String> arrayItems = pfm.getArrayPage().retriveArrayPageItems();
-		String firstItem = arrayItems.getFirst();
+		String firstItem = arrayItems.get(0);
 
 		LoggerLoad.info("Clicking on: " + firstItem + " on Array page");
 		pfm.getArrayPage().clickArrayPageLinks(firstItem);
