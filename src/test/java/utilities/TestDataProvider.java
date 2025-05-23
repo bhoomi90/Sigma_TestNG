@@ -1,5 +1,6 @@
 package utilities;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -8,21 +9,113 @@ import org.testng.annotations.DataProvider;
 
 public class TestDataProvider {
 
-	static String filePath = ConfigReader.getPropertyValue("EXCELPATH");
+	private static final String filePath = ConfigReader.getPropertyValue("EXCELPATH");
+	private static final ExcelReader reader = new ExcelReader(filePath);
+	private static final Map<String, List<Map<String, String>>> sheetDataCache = new HashMap<>();
 
-	@DataProvider(name = "pythonCode")
-	public static List<Map<String, String>> getAllCodeData() {
-	    String sheetName = "PythonCode";
-	    ExcelReader reader = new ExcelReader(filePath);
-	    return reader.getDataAll(sheetName);
+	static {
+		sheetDataCache.put("Login", reader.getDataAll("Login"));
+		sheetDataCache.put("PythonCode", reader.getDataAll("PythonCode"));
+		sheetDataCache.put("Array", reader.getDataAll("Array"));
+		sheetDataCache.put("Register", reader.getDataAll("Register"));
 	}
 	
+	public Object[][] getLoginTestDataByValidationType(String validationType) {
+		List<Map<String, String>> loginData = sheetDataCache.get("Login");
+
+		for (Map<String, String> row : loginData) {
+			String validationTestData = row.get("validation");
+
+			if (validationType.equalsIgnoreCase(validationTestData)) {
+				return new Object[][] { { row.get("username"), row.get("password"), row.get("message") } };
+			}
+		}
+		throw new RuntimeException("No test data found for validation type: " + validationType);
+	}
+
+	@DataProvider(name = "ValidLoginData")
+	public Object[][] getValidLoginData() {
+		return getLoginTestDataByValidationType("ValidCredential");
+	}
+
+	@DataProvider(name = "InvalidUserLoginData")
+	public Object[][] getInvalidUserLoginData() {
+		return getLoginTestDataByValidationType("InvalidUsername");
+	}
+
+	@DataProvider(name = "InvalidPWLoginData")
+	public Object[][] getInvalidPWLoginData() {
+		return getLoginTestDataByValidationType("InvalidPassword");
+	}
+
+	@DataProvider(name = "EmptyUserLoginData")
+	public Object[][] getEmptyUserLoginData() {
+		return getLoginTestDataByValidationType("EmptyUsername");
+	}
+
+	@DataProvider(name = "EmptyPWLoginData")
+	public Object[][] getEmptyPWLoginData() {
+		return getLoginTestDataByValidationType("EmptyPassword");
+	}
+
+	public Object[][] getRegisterTestDataByValidationType(String validationType) {
+		List<Map<String, String>> registerData = sheetDataCache.get("Register");
+
+		for (Map<String, String> row : registerData) {
+			String validationTestData = row.get("validation");
+
+			if (validationType.equalsIgnoreCase(validationTestData)) {
+				return new Object[][] { { row.get("username"), row.get("password"), row.get("confirmpassword"), row.get("message") } };
+			}
+		}
+		throw new RuntimeException("No test data found for validation type: " + validationType);
+	}
+	
+	@DataProvider(name="EmptyUserRegisterData")
+	public Object[][] getEmptyUserRegisterData() {
+		return getRegisterTestDataByValidationType("EmptyUsername");
+	}
+	
+	@DataProvider(name="EmptyPWRegisterData")
+	public Object[][] getEmptyPWRegisterData() {
+		return getRegisterTestDataByValidationType("EmptyPassword");
+	}
+	
+	@DataProvider(name="EmptyConfirmPWRegisterData")
+	public Object[][] getEmptyConfirmPWRegisterData() {
+		return getRegisterTestDataByValidationType("EmptyConfirmPassword");
+	}
+	
+	@DataProvider(name="MismatchPWRegisterData")
+	public Object[][] getMismatchPWRegisterData() {
+		return getRegisterTestDataByValidationType("MismatchPassword");
+	}
+	
+	@DataProvider(name="ShortPWRegisterData")
+	public Object[][] getShortPWRegisterData() {
+		return getRegisterTestDataByValidationType("ShortPassword");
+	}
+	
+	@DataProvider(name="NumPWRegisterData")
+	public Object[][] getNumPWRegisterData() {
+		return getRegisterTestDataByValidationType("NumericPassword");
+	}
+	
+	@DataProvider(name="ValidDataRegisterData")
+	public Object[][] getValidDataRegisterData() {
+		return getRegisterTestDataByValidationType("ValidCredential");
+	}
+		
+	@DataProvider(name = "pythonCode")
+	public static List<Map<String, String>> getAllCodeData() {
+		return sheetDataCache.get("PythonCode");
+	}
+
 	@DataProvider(name = "practiceQueCode")
 	public static List<Map<String, String>> getAllpracticeQueCodeData() {
-	    String sheetName = "Array";
-	    ExcelReader reader = new ExcelReader(filePath);
-	    return reader.getDataAll(sheetName);
+		return sheetDataCache.get("Array");
 	}
+	
 	
 	//public static Object[][] convertListTo2DArray(List<Map<String, String>> list) {
 	//	Object[][] data = new Object[list.size()][1];
@@ -52,75 +145,6 @@ public class TestDataProvider {
 	       // data[i][0] = testData.get(i);
 	   // }
 	   // return data;
-//	}
-
-	
-
-	
-//	@DataProvider(name = "ValidLoginData")
-//	public Object[][] getLoginData() {
-//		String sheetName = "Login";
-//		String validationType = "ValidCredential";
-//		String usernameTestData = null;
-//		String passwordTestData = null;
-//		List<Map<String, String>> testData;
-//		ExcelReader reader = new ExcelReader(filePath);
-//		testData = reader.getDataAll(sheetName);
-//
-//		for (Map<String, String> row : testData) {
-//			String validationTestData = row.get("validation");
-//
-//			if (validationType.equalsIgnoreCase(validationTestData)) {
-//				usernameTestData = row.get("username");
-//				passwordTestData = row.get("password");
-//				break;
-//			}
-//		}
-//		return new Object[][] { { usernameTestData, passwordTestData } };
-//	}
-//
-//	@DataProvider(name = "EmptyCode")
-//	public Object[][] getEmptyCode() {
-//		String sheetName = "PythonCode";
-//		String validationType = "Empty";
-//		String emptyCode = null;
-//		String expectedResults = null;
-//		List<Map<String, String>> testData;
-//		ExcelReader reader = new ExcelReader(filePath);
-//		testData = reader.getDataAll(sheetName);
-//
-//		for (Map<String, String> row : testData) {
-//			String validationTestData = row.get("codeValidations");
-//
-//			if (validationType.equalsIgnoreCase(validationTestData)) {
-//				emptyCode = row.get("code");
-//				expectedResults = row.get("expectedResults");
-//				break;
-//			}
-//		}
-//		return new Object[][] {{emptyCode, expectedResults}};
-//	}
-//	
-//	@DataProvider(name = "ValidCode")
-//	public Object[][] getValidCode() {
-//		String sheetName = "PythonCode";
-//		String validationType = "Valid";
-//		String validCode = null;
-//		String expectedResults = null;
-//		List<Map<String, String>> testData;
-//		ExcelReader reader = new ExcelReader(filePath);
-//		testData = reader.getDataAll(sheetName);
-//
-//		for (Map<String, String> row : testData) {
-//			String validationTestData = row.get("codeValidations");
-//
-//			if (validationType.equalsIgnoreCase(validationTestData)) {
-//				validCode = row.get("code");
-//				expectedResults = row.get("expectedResults");
-//				break;
-//			}
-//		}
-//		return new Object[][] {{validCode, expectedResults}};
 //	}
 	
 //	@DataProvider(name = "invalidCode")

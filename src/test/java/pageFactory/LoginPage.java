@@ -3,10 +3,12 @@ package pageFactory;
 import java.util.List;
 import java.util.Map;
 
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
+import utilities.CommonMethods;
 import utilities.ConfigReader;
 import utilities.ExcelReader;
 import utilities.LoggerLoad;
@@ -26,7 +28,7 @@ public class LoginPage {
 	private WebElement alertMsg;
 
 	String filePath = ConfigReader.getPropertyValue("EXCELPATH");
-	String loginText, logoutText;
+	String loginText, logoutText, errorText;
 
 	public LoginPage() {
 		PageFactory.initElements(DriverFactory.getdriver(), this);
@@ -71,15 +73,41 @@ public class LoginPage {
 	}
 
 	public String compareLogoutMsg() {
+		CommonMethods.waitForElementTobeClick(alertMsg);
 		logoutText = alertMsg.getText();
 		return logoutText;
 	}
 
 	public String compareLoginMsg() {
+		CommonMethods.waitForElementTobeClick(alertMsg);
 		loginText = alertMsg.getText();
 		return loginText;
 	}
+	
+	public String readErrorText() {
+		CommonMethods.waitForElementTobeClick(alertMsg);
+		errorText = alertMsg.getText();
+		return errorText;
+	}
 
+	public void enterfields(String usernameInput, String passwordInput) {
+		userName.sendKeys(usernameInput);
+		passWord.sendKeys(passwordInput);
+		login.click();
+	}
+	
+	public String getEmptyUserNameAlertMsg() {
+		JavascriptExecutor js = (JavascriptExecutor) DriverFactory.getdriver();
+		String validationMsg = (String) js.executeScript ("return arguments[0].validationMessage;", userName);
+		return 	validationMsg;
+	}
+	
+	public String getEmptyPasswordAlertMsg() {
+		JavascriptExecutor js = (JavascriptExecutor) DriverFactory.getdriver();
+		String validationMsg = (String) js.executeScript( "return arguments[0].validationMessage;", passWord);
+		return 	validationMsg;
+	}
+	
 	public void clickSignOut() {
 		signOut.click();
 	}
