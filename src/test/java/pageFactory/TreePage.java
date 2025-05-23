@@ -3,10 +3,12 @@ package pageFactory;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
+import utilities.CommonMethods;
 import webdriver.DriverFactory;
 
 public class TreePage {
@@ -26,8 +28,8 @@ public class TreePage {
 	private WebElement runBttn;
 	@FindBy(linkText = "Try here>>>")
 	private WebElement btnTryHere;
-	@FindBy(xpath = ("//textarea[@spellcheck='false']"))
-	private WebElement enterCode;
+	@FindBy(css = ".CodeMirror.cm-s-default")
+	private WebElement codeMirror;
 	@FindBy(id = "output")
 	private WebElement output;
 	@FindBy(xpath = "//a[text()='Practice Questions']")
@@ -98,27 +100,22 @@ public class TreePage {
 			return true;
 	}
 
-	public void emptyCode(String emptyCode) {
-		if (emptyCode == null)
-			runBttn.click();
-		else {
-			enterCode.sendKeys(emptyCode);
-			runBttn.click();
-		}
+	public void writeTryEditorCode(String code) {
+	    JavascriptExecutor js = (JavascriptExecutor) DriverFactory.getdriver();
+		 //get HTML element document.querySelector('.CodeMirror') & reference to the actual CodeMirror editor instance. Stores code-mirror editor instance to editor variable.
+		js.executeScript(
+			"let editor = document.querySelector('.CodeMirror').CodeMirror;" +
+			"editor.setValue(arguments[0]);", code);	//passing code as a parameter rather than hardcoding it inside the JS string.editor.setValue(code);	
 	}
 
-	public void validCode(String validCode) {
-		enterCode.sendKeys(validCode);
+	public void clickRunButton() {
+		CommonMethods.waitForElementTobeClick(runBttn);
 		runBttn.click();
 	}
-
+	
 	public boolean isOutputSuccess() {
 		return output.isDisplayed();
 	}
 
-	public void invalidCode(String invalidCode) {
-		enterCode.sendKeys(invalidCode);
-		runBttn.click();
-	}
 
 }
