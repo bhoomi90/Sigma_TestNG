@@ -8,7 +8,6 @@
 	<test name="EdgeTest">
 		<parameter name="browser" value="edge" />
 		<classes>
-                        <class name="testClasses.HomeTest"></class>
 			<class name="testClasses.DataStructureTest"></class>
 			<class name="testClasses.GraphTest"></class>
 			<class name="testClasses.ArrayTest"></class>
@@ -18,13 +17,13 @@
 			<class name="testClasses.QueueTest"></class>
 			<class name="testClasses.LoginTest"></class>
 			<class name="testClasses.RegisterTest"></class>
+			<class name="testClasses.HomeTest"></class>
 		</classes>
 	</test>
 
 	<test name="ChromeTest">
 		<parameter name="browser" value="chrome" />
 		<classes>
-                       <class name="testClasses.HomeTest"></class>
 			<class name="testClasses.DataStructureTest"></class>
 			<class name="testClasses.GraphTest"></class>
 			<class name="testClasses.ArrayTest"></class>
@@ -34,6 +33,7 @@
 			<class name="testClasses.QueueTest"></class>
 			<class name="testClasses.LoginTest"></class>
 			<class name="testClasses.RegisterTest"></class>
+			<class name="testClasses.HomeTest"></class>
 		</classes>
 	</test>
 </suite>
