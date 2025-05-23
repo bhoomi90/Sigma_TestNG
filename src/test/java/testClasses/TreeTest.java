@@ -84,12 +84,15 @@ public class TreeTest extends Hooks {
 		LoggerLoad.info("Verifying redirection to tryEditor page, expected title: " + expectedTitle);
 		Assert.assertEquals(driver.getTitle(), expectedTitle, "Not directed to try editor page");
 
-		pfm.getTreePage().emptyCode(emptyCode);
+		pfm.getTreePage().writeTryEditorCode(emptyCode);
+		pfm.getTreePage().clickRunButton();
 	}
 
 	public void validCodeTest(String validCode, String expectedResults) {
 		driver.navigate().refresh();
-		pfm.getTreePage().validCode(validCode);
+		pfm.getTreePage().writeTryEditorCode(validCode);
+		pfm.getTreePage().clickRunButton();
+		
 		if (pfm.getTreePage().isOutputSuccess()) {
 			assertTrue(pfm.getTreePage().isOutputSuccess(), "Success output not shown as expected: " + expectedResults);
 			LoggerLoad.info("Output is successfully displayed");
@@ -102,7 +105,9 @@ public class TreeTest extends Hooks {
 
 	public void invalidCodeTest(String invalidCode, String expectedResults) {
 		driver.navigate().refresh();
-		pfm.getTreePage().invalidCode(invalidCode);
+		pfm.getTreePage().writeTryEditorCode(invalidCode);
+		pfm.getTreePage().clickRunButton();
+		
 		String actualMsg = CommonMethods.getAlertText(driver);
 		if (actualMsg == null) {
 			LoggerLoad.error("Expected to receive Alert after invalid python code");

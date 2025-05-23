@@ -84,12 +84,15 @@ public class QueueTest extends Hooks {
 		LoggerLoad.info("Verifying redirection to tryEditor page, expected title: " + expectedTitle);
 		Assert.assertEquals(driver.getTitle(), expectedTitle, "Not directed to try editor page");
 
-		pfm.getQueuePage().emptyCode(emptyCode);
+		pfm.getQueuePage().writeTryEditorCode(emptyCode);
+		pfm.getQueuePage().clickRunButton();
 	}
 
 	public void validCodeTest(String validCode, String expectedResults) {
 		driver.navigate().refresh();
-		pfm.getQueuePage().validCode(validCode);
+		pfm.getQueuePage().writeTryEditorCode(validCode);
+		pfm.getQueuePage().clickRunButton();
+		
 		if (pfm.getQueuePage().isOutputSuccess()) {
 			assertTrue(pfm.getQueuePage().isOutputSuccess(),
 					"Success output not shown as expected: " + expectedResults);
@@ -103,7 +106,9 @@ public class QueueTest extends Hooks {
 
 	public void invalidCodeTest(String invalidCode, String expectedResults) {
 		driver.navigate().refresh();
-		pfm.getQueuePage().invalidCode(invalidCode);
+		pfm.getQueuePage().writeTryEditorCode(invalidCode);
+		pfm.getQueuePage().clickRunButton();
+		
 		String actualMsg = CommonMethods.getAlertText(driver);
 		if (actualMsg == null) {
 			LoggerLoad.error("Expected to receive Alert after invalid python code");

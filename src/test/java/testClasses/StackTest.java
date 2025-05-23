@@ -84,12 +84,15 @@ public class StackTest extends Hooks {
 		LoggerLoad.info("Verifying redirection to tryEditor page, expected title: " + expectedTitle);
 		Assert.assertEquals(driver.getTitle(), expectedTitle, "Not directed to try editor page");
 
-		pfm.getStackPage().emptyCode(emptyCode);
+		pfm.getStackPage().writeTryEditorCode(emptyCode);
+		pfm.getStackPage().clickRunButton();
 	}
 
 	public void validCodeTest(String validCode, String expectedResults) {
 		driver.navigate().refresh();
-		pfm.getStackPage().validCode(validCode);
+		pfm.getStackPage().writeTryEditorCode(validCode);
+		pfm.getStackPage().clickRunButton();
+		
 		if (pfm.getStackPage().isOutputSuccess()) {
 			assertTrue(pfm.getStackPage().isOutputSuccess(),
 					"Success output not shown as expected: " + expectedResults);
@@ -103,7 +106,9 @@ public class StackTest extends Hooks {
 
 	public void invalidCodeTest(String invalidCode, String expectedResults) {
 		driver.navigate().refresh();
-		pfm.getStackPage().invalidCode(invalidCode);
+		pfm.getStackPage().writeTryEditorCode(invalidCode);
+		pfm.getStackPage().clickRunButton();
+		
 		String actualMsg = CommonMethods.getAlertText(driver);
 		if (actualMsg == null) {
 			LoggerLoad.error("Expected to receive Alert after invalid python code");
