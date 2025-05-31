@@ -106,6 +106,34 @@ public class TestDataProvider {
 		return getRegisterTestDataByValidationType("ValidCredential");
 	}
 		
+	public Object[][] getPythonCodeDataByValidationType(String validationType) {
+		List<Map<String, String>> codeData = sheetDataCache.get("PythonCode");
+
+		for (Map<String, String> row : codeData) {
+			String validationTestData = row.get("codeValidations");
+
+			if (validationType.equalsIgnoreCase(validationTestData)) {
+				return new Object[][] { { row.get("code"), row.get("expectedResults")} };
+			}
+		}
+		throw new RuntimeException("No test data found for validation type: " + validationType);
+	}
+	
+	@DataProvider(name="EmptyPythonCode")
+	public Object[][] getEmptyPythonCodeData() {
+		return getPythonCodeDataByValidationType("Empty");
+	}
+	
+	@DataProvider(name="ValidPythonCode")
+	public Object[][] getValidPythonCodeData() {
+		return getPythonCodeDataByValidationType("Valid");
+	}
+	
+	@DataProvider(name="InvalidPythonCode")
+	public Object[][] getInvalidPythonCodeData() {
+		return getPythonCodeDataByValidationType("Invalid");
+	}
+	
 	@DataProvider(name = "pythonCode")
 	public static List<Map<String, String>> getAllCodeData() {
 		return sheetDataCache.get("PythonCode");
@@ -116,7 +144,7 @@ public class TestDataProvider {
 		return sheetDataCache.get("Array");
 	}
 	
-	
+}
 	//public static Object[][] convertListTo2DArray(List<Map<String, String>> list) {
 	//	Object[][] data = new Object[list.size()][1];
 	//	for (int i = 0; i < list.size(); i++) {
@@ -188,5 +216,5 @@ public class TestDataProvider {
 //	    return data.toArray(new Object[][] {});
 	
 	
-}
+
 

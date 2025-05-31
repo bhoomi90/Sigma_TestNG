@@ -22,7 +22,7 @@ public class CommonMethods {
 			return alertMsg;
 		} catch (Exception e) {
 
-			System.out.println("No alert found within timeout: " + DEFAULT_TIMEOUT + " seconds");
+			LoggerLoad.info("No alert found within timeout: " + DEFAULT_TIMEOUT + " seconds");
 			return null;
 		}
 	}

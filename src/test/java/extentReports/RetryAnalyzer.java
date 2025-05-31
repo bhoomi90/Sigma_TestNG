@@ -14,8 +14,5 @@ public class RetryAnalyzer implements IRetryAnalyzer {
 		   return true;  //retry failed test
 	  }
 		return false; // do not retry if passed or max retry reached
-	}
-	
-
-
+	}	
 }
