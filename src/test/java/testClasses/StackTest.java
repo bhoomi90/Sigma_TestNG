@@ -35,6 +35,7 @@ public class StackTest extends Hooks {
             pfm.getStackPage().clickRunButton();
             driver.navigate().back(); // Go back to stack topic list
         }
+        LoggerLoad.info("----------------------------------------------------");
     }
 
     @Test(priority = 2, dataProvider = "ValidPythonCode", dataProviderClass = TestDataProvider.class)
@@ -53,6 +54,7 @@ public class StackTest extends Hooks {
             }
             driver.navigate().back();
         }
+        LoggerLoad.info("----------------------------------------------------");
     }
 
     @Test(priority = 3, dataProvider = "InvalidPythonCode", dataProviderClass = TestDataProvider.class)
@@ -73,6 +75,7 @@ public class StackTest extends Hooks {
             }
             driver.navigate().back();
         }
+        LoggerLoad.info("----------------------------------------------------");
     }
 
     @Test(priority = 4)
@@ -101,11 +104,8 @@ public class StackTest extends Hooks {
 
 
     private void navigateToTryEditor(String topic)  {
-        try {
-			pfm.getStackPage().clickStackPageLinks(topic);
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-        }
+        
+		pfm.getStackPage().clickStackPageLinks(topic);		
         pfm.getStackPage().clickTryHereBtn();
         Assert.assertEquals(driver.getTitle(), "Assessment", "Not directed to Try Editor page");
     }

@@ -59,7 +59,7 @@ public class TreePage {
 		return itemTexts;
 	}
 
-	public void clickTreePageLinks(String item) throws InterruptedException {
+	public void clickTreePageLinks(String item) {
 		for (WebElement e : treePageLinks) {
 			if (e.getText().equalsIgnoreCase(item)) {
 				e.click();

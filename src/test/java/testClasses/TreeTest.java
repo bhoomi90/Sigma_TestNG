@@ -37,6 +37,7 @@ public class TreeTest extends Hooks {
             pfm.getTreePage().clickRunButton();
             driver.navigate().back(); 
         }
+        LoggerLoad.info("----------------------------------------------------");
     }
 
     @Test(priority = 2, dataProvider = "ValidPythonCode", dataProviderClass = TestDataProvider.class)
@@ -55,6 +56,7 @@ public class TreeTest extends Hooks {
             }
             driver.navigate().back();
         }
+        LoggerLoad.info("----------------------------------------------------");
     }
 
     @Test(priority = 3, dataProvider = "InvalidPythonCode", dataProviderClass = TestDataProvider.class)
@@ -75,6 +77,7 @@ public class TreeTest extends Hooks {
             }
             driver.navigate().back();
         }
+        LoggerLoad.info("----------------------------------------------------");
     }
 
     @Test(priority = 4)
@@ -102,11 +105,8 @@ public class TreeTest extends Hooks {
     }
 
     private void navigateToTryEditor(String topic)  {
-        try {
-			pfm.getTreePage().clickTreePageLinks(topic);
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		}
+ 
+    	pfm.getTreePage().clickTreePageLinks(topic);
         pfm.getTreePage().clickTryHereBtn();
         Assert.assertEquals(driver.getTitle(), "Assessment", "Not directed to Try Editor page");
     }
