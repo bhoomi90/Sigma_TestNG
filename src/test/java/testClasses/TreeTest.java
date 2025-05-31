@@ -23,8 +23,8 @@ public class TreeTest extends Hooks {
 		String expectedTitle = "Tree";
 		String actualTitle = driver.getTitle();
 		LoggerLoad.info(
-				"Verifying redirection to Tree Intro page, expected title: " + expectedTitle);
-		Assert.assertEquals(actualTitle, expectedTitle, "Not directed to Tree Intro page");
+				"Verifying redirection to Tree page, expected title: " + expectedTitle);
+		Assert.assertEquals(actualTitle, expectedTitle, "Not directed to Tree page");
 		
 		}
     

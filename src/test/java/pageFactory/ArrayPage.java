@@ -1,6 +1,5 @@
 package pageFactory;
 
-import org.openqa.selenium.WebDriver;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -31,8 +30,9 @@ public class ArrayPage {
 
 	@FindBy(xpath = "//a[text()='Try here>>>']")
 	private WebElement tryHereButton;
-	@FindBy(xpath = ("//textarea[@spellcheck='false']"))
-	private WebElement writeTryEditorCode;
+
+	@FindBy(css = ".CodeMirror.cm-s-default")
+	private WebElement codeMirror;
 	@FindBy(xpath = ("//*[text()='Run']"))
 	private WebElement runBttn;
 
@@ -82,20 +82,6 @@ public class ArrayPage {
 		tryHereButton.click();
 	}
 
-	public void emptyCode(String emptyCode) {
-		if (emptyCode == null)
-			runBttn.click();
-		else {
-			writeTryEditorCode.sendKeys(emptyCode);
-			runBttn.click();
-		}
-	}
-
-	public void validCode(String validCode) {
-		writeTryEditorCode.sendKeys(validCode);
-		runBttn.click();
-	}
-
 	public boolean isOutputSuccess() {
 		return output.isDisplayed();
 	}
@@ -103,11 +89,6 @@ public class ArrayPage {
 	public String getOutput() {
 		CommonMethods.waitForElementTobeClick(output);
 		return output.getText();
-	}
-
-	public void invalidCode(String invalidCode) {
-		writeTryEditorCode.sendKeys(invalidCode);
-		runBttn.click();
 	}
 
 	public void clickRunButton() {
@@ -136,6 +117,14 @@ public class ArrayPage {
 						// string.editor.setValue(code);
 	}
 
+	public void writeTryEditorCode(String code) {
+	    JavascriptExecutor js = (JavascriptExecutor) DriverFactory.getdriver();
+		 //get HTML element document.querySelector('.CodeMirror') & reference to the actual CodeMirror editor instance. Stores code-mirror editor instance to editor variable.
+		js.executeScript(
+			"let editor = document.querySelector('.CodeMirror').CodeMirror;" +
+			"editor.setValue(arguments[0]);", code);	//passing code as a parameter rather than hardcoding it inside the JS string.editor.setValue(code);	
+	}
+	
 	public void clickPracticeQuesOfArray() {
 		PracticeQuesOfArray.click();
 	}

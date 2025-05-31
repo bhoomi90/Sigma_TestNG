@@ -142,12 +142,15 @@ public class ArrayTest extends Hooks {
 		LoggerLoad.info("Verifying redirection to tryEditor page, expected title: " + expectedTitle);
 		Assert.assertEquals(driver.getTitle(), expectedTitle, "Not directed to try editor page");
 
-		pfm.getArrayPage().emptyCode(emptyCode);
+		pfm.getArrayPage().writeTryEditorCode(emptyCode);
+		pfm.getArrayPage().clickRunButton();
 	}
 
 	public void validCodeTest(String validCode, String expectedResults) {
 		driver.navigate().refresh();
-		pfm.getArrayPage().validCode(validCode);
+		pfm.getArrayPage().writeTryEditorCode(validCode);
+		pfm.getArrayPage().clickRunButton();
+		
 		if (pfm.getArrayPage().isOutputSuccess()) {
 			assertTrue(pfm.getArrayPage().isOutputSuccess(),
 					"Success output not shown as expected: " + expectedResults);
@@ -161,7 +164,9 @@ public class ArrayTest extends Hooks {
 
 	public void invalidCodeTest(String invalidCode, String expectedResults) {
 		driver.navigate().refresh();
-		pfm.getArrayPage().invalidCode(invalidCode);
+		pfm.getArrayPage().writeTryEditorCode(invalidCode);
+		pfm.getArrayPage().clickRunButton();
+		
 		String actualMsg = CommonMethods.getAlertText(driver);
 		if (actualMsg == null) {
 			LoggerLoad.error("Expected to receive Alert after invalid python code");
@@ -173,7 +178,7 @@ public class ArrayTest extends Hooks {
 	}
 
 	public void checkOutputafterRun(String codeType, String questionPage, String expectedRunOutput) {
-		// SoftAssert softAssert = new SoftAssert();
+		
 		String actualOutput = null;
 
 		LoggerLoad.info("------------------------------------");
@@ -202,7 +207,7 @@ public class ArrayTest extends Hooks {
 	}
 
 	public void checkOutputafterSubmit(String codeType, String questionPage, String expectedSubmitOutput) {
-		// SoftAssert softAssert = new SoftAssert();
+		
 		String actualOutput = null;
 
 		actualOutput = pfm.getArrayPage().getOutput();

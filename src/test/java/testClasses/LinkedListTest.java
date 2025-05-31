@@ -84,12 +84,15 @@ public class LinkedListTest extends Hooks {
 		LoggerLoad.info("Verifying redirection to tryEditor page, expected title: " + expectedTitle);
 		Assert.assertEquals(driver.getTitle(), expectedTitle, "Not directed to try editor page");
 
-		pfm.getLinkedListPage().emptyCode(emptyCode);
+		pfm.getLinkedListPage().writeTryEditorCode(emptyCode);
+		pfm.getLinkedListPage().clickRunButton();
 	}
 
 	public void validCodeTest(String validCode, String expectedResults) {
 		driver.navigate().refresh();
-		pfm.getLinkedListPage().validCode(validCode);
+		pfm.getLinkedListPage().writeTryEditorCode(validCode);
+		pfm.getLinkedListPage().clickRunButton();
+		
 		if (pfm.getLinkedListPage().isOutputSuccess()) {
 			assertTrue(pfm.getLinkedListPage().isOutputSuccess(),
 					"Success output not shown as expected: " + expectedResults);
@@ -103,7 +106,9 @@ public class LinkedListTest extends Hooks {
 
 	public void invalidCodeTest(String invalidCode, String expectedResults) {
 		driver.navigate().refresh();
-		pfm.getLinkedListPage().invalidCode(invalidCode);
+		pfm.getLinkedListPage().writeTryEditorCode(invalidCode);
+		pfm.getLinkedListPage().clickRunButton();
+		
 		String actualMsg = CommonMethods.getAlertText(driver);
 		if (actualMsg == null) {
 			LoggerLoad.error("Expected to receive Alert after invalid python code");

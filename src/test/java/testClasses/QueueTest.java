@@ -23,8 +23,8 @@ public class QueueTest extends Hooks {
 		String expectedTitle = "Queue";
 		String actualTitle = driver.getTitle();
 		LoggerLoad.info(
-				"Verifying redirection to Queue Intro page, expected title: " + expectedTitle);
-		Assert.assertEquals(actualTitle, expectedTitle, "Not directed to Queue Intro page");
+				"Verifying redirection to Queue page, expected title: " + expectedTitle);
+		Assert.assertEquals(actualTitle, expectedTitle, "Not directed to Queue page");
 	
 		}
     
@@ -106,9 +106,8 @@ public class QueueTest extends Hooks {
 			pfm.getQueuePage().clickQueuePageLinks(topic);
 		} catch (InterruptedException e) {
 			e.printStackTrace();
-		}
-        pfm.getQueuePage().clickTryHereBtn();
-        Assert.assertEquals(driver.getTitle(), "Assessment", "Not directed to Try Editor page");
     }
+        pfm.getQueuePage().clickTryHereBtn();
+		Assert.assertEquals(driver.getTitle(), expectedTitle, "Not directed to Queue page");
+	}
 }
-	

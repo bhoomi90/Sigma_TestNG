@@ -105,7 +105,7 @@ public class StackTest extends Hooks {
 			pfm.getStackPage().clickStackPageLinks(topic);
 		} catch (InterruptedException e) {
 			e.printStackTrace();
-		}
+        }
         pfm.getStackPage().clickTryHereBtn();
         Assert.assertEquals(driver.getTitle(), "Assessment", "Not directed to Try Editor page");
     }
