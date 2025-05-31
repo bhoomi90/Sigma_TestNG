@@ -37,6 +37,7 @@ public class QueueTest extends Hooks {
             pfm.getQueuePage().clickRunButton();
             driver.navigate().back(); 
         }
+        LoggerLoad.info("----------------------------------------------------");
     }
 
     @Test(priority = 2, dataProvider = "ValidPythonCode", dataProviderClass = TestDataProvider.class)
@@ -55,6 +56,7 @@ public class QueueTest extends Hooks {
             }
             driver.navigate().back();
         }
+        LoggerLoad.info("----------------------------------------------------");
     }
 
     @Test(priority = 3, dataProvider = "InvalidPythonCode", dataProviderClass = TestDataProvider.class)
@@ -75,6 +77,7 @@ public class QueueTest extends Hooks {
             }
             driver.navigate().back();
         }
+        LoggerLoad.info("----------------------------------------------------");
     }
 
     @Test(priority = 4)
@@ -102,12 +105,9 @@ public class QueueTest extends Hooks {
     }
 
     private void navigateToTryEditor(String topic)  {
-        try {
-			pfm.getQueuePage().clickQueuePageLinks(topic);
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-    }
+       
+		pfm.getQueuePage().clickQueuePageLinks(topic);
         pfm.getQueuePage().clickTryHereBtn();
-		Assert.assertEquals(driver.getTitle(), expectedTitle, "Not directed to Queue page");
+		Assert.assertEquals(driver.getTitle(), "Assessment", "Not directed to Queue page");
 	}
 }

@@ -59,7 +59,7 @@ public class StackPage {
 		return itemTexts;
 	}
 
-	public void clickStackPageLinks(String item) throws InterruptedException {
+	public void clickStackPageLinks(String item) {
 		for (WebElement e : stackPageLinks) {
 			if (e.getText().equalsIgnoreCase(item)) {
 				e.click();

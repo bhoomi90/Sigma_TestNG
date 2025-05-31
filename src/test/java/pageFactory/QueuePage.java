@@ -57,7 +57,7 @@ public class QueuePage {
 		return itemTexts;
 	}
 
-	public void clickQueuePageLinks(String item) throws InterruptedException {
+	public void clickQueuePageLinks(String item) {
 		for (WebElement e : QueuePageLinks) {
 			if (e.getText().equalsIgnoreCase(item)) {
 				e.click();
